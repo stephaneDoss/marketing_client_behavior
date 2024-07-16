@@ -36,14 +36,15 @@
 
 - Quel est le principal problème ?
 
-Les responsables marketing veulent comprendre comment segmenter efficacement leurs clients afin de mieux cibler leurs campagnes marketing et maximiser leur retour sur investissement. Ils doivent s'assurer que les segments identifiés sont pertinents et exploitables pour des actions marketing concrètes.
+Les responsables marketing veulent comprendre comment segmenter efficacement leurs clients pour connaître les clients les plus rentable afin de mieux cibler leurs campagnes marketing et maximiser leur retour sur investissement.
 
 - Quelle est la solution idéale ? 
 
-Créer un tableau de bord qui segmente les clients par:
-- la récence des achats
-- la fréquence des achats
-- le montant total des achats
+Créer un tableau de bord qui permet de:
+- visualiser la distribution des clients selon les scores RFM
+- comparer les segments en termes de nombre de clients, fréquence d'achat, et montant dépensé.
+- analyser les relations entre les dimensions R, F, et M.
+- montrer la répartition des revenus par segment.
 
 Cela permettra à l'équipe marketing de prendre des décisions éclairées sur la manière de cibler les différents segments de clients avec des campagnes marketing adaptées, afin de maximiser le retour sur investissement et améliorer la satisfaction clientèle
 
@@ -52,7 +53,7 @@ Cela permettra à l'équipe marketing de prendre des décisions éclairées sur 
 
 En tant que responsable marketing, je souhaite utiliser un tableau de bord qui analyse les données d'achat des clients.
 
-Ce tableau de bord devrait me permettre d'identifier les segments de clients basés sur la récence, la fréquence et le montant total des achats (RFM).
+Ce tableau de bord devrait me permettre d'identifier les segments de clients les pus rentables basés sur la récence, la fréquence et le montant total des achats (RFM).
 
 Avec ces informations, je peux prendre des décisions plus éclairées sur la manière de cibler les différents segments de clients avec des campagnes marketing adaptées, afin de maximiser l'efficacité de chaque campagne et d'améliorer la satisfaction client.
 
@@ -86,25 +87,24 @@ Les données viennent de la plateforme UCI (Excel), ([https://archive.ics.uci.ed
 - Que doit contenir le tableau de bord en fonction des exigences fournies ?
 Pour comprendre ce qu'il doit contenir, nous devons déterminer à quelles questions le tableau de bord doit répondre :
 
-1. Combien de clients ont effectué des achats dans la période ?
-2. Quels sont les différents segments de clients identifiés par l'analyse RFM ?
-3. Quel est le nombre de jours moyen depuis le dernier achat pour les différents segments de clients ?
-4. Quels segments de clients effectuent des achats fréquents ?
-5. Quels segments de clients génèrent le plus de revenus ?
-6. Qui sont les clients les plus précieux en termes de fréquence et de montant dépensé ?
+1. Quels sont les segments de clients les plus rentables ?
+2. Quelle est la distribution des clients selon les segments RFM ?
+3. Quel est le comportement d'achat des différents segments de clients ?
+4. Comment évoluent les segments de clients au fil du temps ?
+5. Quels segments de clients ont le potentiel de devenir plus rentables ?
+6. Quels clients nécessitent des efforts de réactivation ?
 
 Pour l’instant, ce sont quelques-unes des questions auxquelles nous devons répondre. Cela pourrait changer à mesure que nous progressons dans notre analyse.
 
 ## Dashboard mockup
 
-- What should it look like? 
-
-Some of the data visuals that may be appropriate in answering our questions include:
-
+- A quoi ça devrait ressembler ?
+  
+Certains des visuels de données qui peuvent être appropriés pour répondre à nos questions comprennent :
 1. Table
-2. Treemap
-3. Scorecards
-4. Horizontal bar chart 
+2. Diagramme à secteurs
+3. Diagramme à barres
+4. Diagramme à points 
 
 
 
