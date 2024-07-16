@@ -5,7 +5,7 @@
 
 # Table of contents 
 
-- [Objective](#objective)
+- [Objectif](#objective)
 - [Data Source](#data-source)
 - [Stages](#stages)
 - [Design](#design)
@@ -34,71 +34,66 @@
 
 # Objective 
 
-- What is the key pain point? 
+- Quel est le principal problème ?
 
-The Head of Marketing wants to find out who the top YouTubers are in 2024 to decide on which YouTubers would be best to run marketing campaigns throughout the rest of the year.
+Les responsables marketing veulent comprendre comment segmenter efficacement leurs clients afin de mieux cibler leurs campagnes marketing et maximiser leur retour sur investissement. Ils doivent s'assurer que les segments identifiés sont pertinents et exploitables pour des actions marketing concrètes.
 
+- Quelle est la solution idéale ? 
 
-- What is the ideal solution? 
+Créer un tableau de bord qui segmente les clients par:
+- la récence des achats
+- la fréquence des achats
+- le montant total des achats
 
-To create a dashboard that provides insights into the top UK YouTubers in 2024 that includes their 
-- subscriber count
-- total views
-- total videos, and
-- engagement metrics
+Cela permettra à l'équipe marketing de prendre des décisions éclairées sur la manière de cibler les différents segments de clients avec des campagnes marketing adaptées, afin de maximiser le retour sur investissement et améliorer la satisfaction clientèle
 
-This will help the marketing team make informed decisions about which YouTubers to collaborate with for their marketing campaigns.
 
 ## User story 
 
-As the Head of Marketing, I want to use a dashboard that analyses YouTube channel data in the UK . 
+En tant que responsable marketing, je souhaite utiliser un tableau de bord qui analyse les données d'achat des clients.
 
-This dashboard should allow me to identify the top performing channels based on metrics like subscriber base and average views. 
+Ce tableau de bord devrait me permettre d'identifier les segments de clients basés sur la récence, la fréquence et le montant total des achats (RFM).
 
-With this information, I can make more informed decisions about which Youtubers are right to collaborate with, and therefore maximize how effective each marketing campaign is.
+Avec ces informations, je peux prendre des décisions plus éclairées sur la manière de cibler les différents segments de clients avec des campagnes marketing adaptées, afin de maximiser l'efficacité de chaque campagne et d'améliorer la satisfaction client.
 
 
 # Data source 
 
-- What data is needed to achieve our objective?
+- Quelles données sont nécessaires pour atteindre notre objectif ?
 
-We need data on the top UK YouTubers in 2024 that includes their 
-- channel names
-- total subscribers
-- total views
-- total videos uploaded
+Nous avons besoin des données d'achat sur le site incluant:
+- l'id du client
+- la date d'achat
+- le montant d'achat
+- le pays d'achat
 
-
-
-- Where is the data coming from? 
-The data is sourced from Kaggle (an Excel extract), [see here to find it.](https://www.kaggle.com/datasets/bhavyadhingra00020/top-100-social-media-influencers-2024-countrywise?resource=download)
+- D'où les données viennent?
+Les données viennent de la plateforme UCI (Excel), ([https://archive.ics.uci.edu/dataset/352/online+retail](https://archive.ics.uci.edu/static/public/352/online+retail.zip))
 
 
 # Stages
 
 - Design
 - Developement
-- Testing
-- Analysis 
+- Test
+- Analyse 
  
 
 
 # Design 
 
-## Dashboard components required 
-- What should the dashboard contain based on the requirements provided?
+## Composant requis pour le dasboard 
+- Que doit contenir le tableau de bord en fonction des exigences fournies ?
+Pour comprendre ce qu'il doit contenir, nous devons déterminer à quelles questions le tableau de bord doit répondre :
 
-To understand what it should contain, we need to figure out what questions we need the dashboard to answer:
+1. Combien de clients ont effectué des achats dans la période ?
+2. Quels sont les différents segments de clients identifiés par l'analyse RFM ?
+3. Quel est le nombre de jours moyen depuis le dernier achat pour les différents segments de clients ?
+4. Quels segments de clients effectuent des achats fréquents ?
+5. Quels segments de clients génèrent le plus de revenus ?
+6. Qui sont les clients les plus précieux en termes de fréquence et de montant dépensé ?
 
-1. Who are the top 10 YouTubers with the most subscribers?
-2. Which 3 channels have uploaded the most videos?
-3. Which 3 channels have the most views?
-4. Which 3 channels have the highest average views per video?
-5. Which 3 channels have the highest views per subscriber ratio?
-6. Which 3 channels have the highest subscriber engagement rate per video uploaded?
-
-For now, these are some of the questions we need to answer, this may change as we progress down our analysis. 
-
+Pour l’instant, ce sont quelques-unes des questions auxquelles nous devons répondre. Cela pourrait changer à mesure que nous progressons dans notre analyse.
 
 ## Dashboard mockup
 
