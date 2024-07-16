@@ -1,1 +1,4 @@
-Data Portfolio: Excel to Power BI
+# Data Portfolio: Segmentation du comportement des clients
+
+![excel-to-powerbi-diagram](asset/images/cover.png)
+
