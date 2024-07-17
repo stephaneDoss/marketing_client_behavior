@@ -15,10 +15,10 @@ st.title('Tableau de Bord RFM Clustering')
 st.subheader("Cluster")
 
 # Afficher le graphique interactif avec Plotly Express pour tous les clusters
-fig2 = px.scatter(rfm, x='Recency', y='Monetary', color='Cluster Name',
+fig2 = px.scatter(rfm, x='Frequency', y='Monetary', color='Cluster Name',
                   title='Données RFM pour tous les clusters',
                   labels={'Recency': 'Récence', 'Monetary': 'Montant'},
-                  hover_data=['Frequency'])  # Ajoutez des données supplémentaires au survol si nécessaire
+                  hover_data=['Recency'])  # Ajoutez des données supplémentaires au survol si nécessaire
 
 st.plotly_chart(fig2)
 
@@ -32,7 +32,7 @@ selected_cluster_name = st.selectbox('Sélectionner un nom de cluster :', sorted
 cluster_data = rfm[rfm['Cluster Name'] == selected_cluster_name]
 
 # Afficher le graphique interactif avec Plotly Express
-fig = px.scatter(cluster_data, x='Recency', y='Monetary', color='Cluster Name',
+fig = px.scatter(cluster_data, x='Frequency', y='Monetary', color='Cluster Name',
                  title=f'Données RFM pour {selected_cluster_name}',
                  labels={'Recency': 'Récence', 'Monetary': 'Montant'})
 
@@ -41,9 +41,9 @@ st.plotly_chart(fig)
 # Calculer et afficher les statistiques du cluster sélectionné
 st.subheader("Analyse du Cluster")
 cluster_stats = rfm.groupby('Cluster Name').agg({
-    'Recency': 'mean',
-    'Frequency': 'mean',
-    'Monetary': 'mean'
+    'Recence': 'mean',
+    'Frequence': 'mean',
+    'Montant': 'mean'
 }).reset_index()
 
 st.write(cluster_stats)
