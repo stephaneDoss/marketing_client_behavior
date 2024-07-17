@@ -41,9 +41,9 @@ st.plotly_chart(fig)
 # Calculer et afficher les statistiques du cluster sélectionné
 st.subheader("Analyse du Cluster")
 cluster_stats = rfm.groupby('Cluster Name').agg({
-    'Recence': 'mean',
-    'Frequence': 'mean',
-    'Montant': 'mean'
+    'Recency': 'mean',
+    'Frequency': 'mean',
+    'Monetary': 'mean'
 }).reset_index()
 
 st.write(cluster_stats)
