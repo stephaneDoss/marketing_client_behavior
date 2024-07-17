@@ -13,27 +13,26 @@ rfm_with_demographics = pd.read_csv('rfm_with_demographics.csv')
 st.title('Tableau de Bord RFM Clustering')
 
 # Sélection du cluster avec un menu déroulant
-selected_cluster = st.selectbox('Sélectionner un cluster :', sorted(
-    rfm_with_demographics['Cluster'].unique()))
+selected_cluster_name = st.selectbox('Sélectionner un nom de cluster :', sorted(
+    rfm_with_demographics['Cluster Name'].unique()))
 
-# Filtrer les données pour le cluster sélectionné
-cluster_data = rfm_with_demographics[rfm_with_demographics['Cluster']
-                                     == selected_cluster]
+# Filtrer les données pour le nom de cluster sélectionné
+cluster_data = rfm_with_demographics[rfm_with_demographics['Cluster Name']
+                                     == selected_cluster_name]
 
 # Afficher le graphique interactif avec Plotly Express
-fig = px.scatter(cluster_data, x='Recency', y='Monetary', color='Country',
-                 title=f'Données RFM pour Cluster {selected_cluster}',
+fig = px.scatter(cluster_data, x='Recency', y='Monetary', color='Cluster Name',
+                 title=f'Données RFM pour {selected_cluster_name}',
                  labels={'Recency': 'Récence', 'Monetary': 'Montant'})
 
 st.plotly_chart(fig)
 
 # Calculer et afficher les statistiques du cluster sélectionné
 st.subheader("Analyse du Cluster")
-cluster_stats = cluster_data.groupby('Cluster').agg({
+cluster_stats = cluster_data.groupby('Cluster Name').agg({
     'Recency': 'mean',
     'Frequency': 'mean',
-    'Monetary': 'mean',
-    'Country': lambda x: x.mode()[0]  # Pays le plus fréquent
+    'Monetary': 'mean'
 }).reset_index()
 
 st.write(cluster_stats)
