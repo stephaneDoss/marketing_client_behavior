@@ -118,8 +118,8 @@ Certains des visuels de données qui peuvent être appropriés pour répondre à
 | Tool | Purpose |
 | --- | --- |
 | Excel | Exploring the data |
-| SQL Server | Cleaning, testing, and analyzing the data |
-| Power BI | Visualizing the data via interactive dashboards |
+| Pandas | Cleaning, testing, and analyzing the data |
+| Streamlit | Visualizing the data via interactive dashboards |
 | GitHub | Hosting the project documentation and version control |
 | Mokkup AI | Designing the wireframe/mockup of the dashboard | 
 
