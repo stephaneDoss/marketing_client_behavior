@@ -39,3 +39,11 @@ st.write(cluster_stats)
 # Affichage supplémentaire si nécessaire
 st.subheader("Détails Supplémentaires")
 st.write("Ajoutez ici des détails ou des analyses supplémentaires selon vos besoins.")
+
+# Afficher le graphique interactif avec Plotly Express pour tous les clusters
+fig2 = px.scatter(rfm, x='Recency', y='Monetary', color='Cluster Name',
+                  title='Données RFM pour tous les clusters',
+                  labels={'Recency': 'Récence', 'Monetary': 'Montant'},
+                  hover_data=['Frequency'])  # Ajoutez des données supplémentaires au survol si nécessaire
+
+st.plotly_chart(fig2)
