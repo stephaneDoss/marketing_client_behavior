@@ -50,4 +50,13 @@ st.write(cluster_stats)
 
 # Affichage supplémentaire si nécessaire
 st.subheader("Détails Supplémentaires")
-st.write("Ajoutez ici des détails ou des analyses supplémentaires selon vos besoins.")
+
+st.subheader("Distribution des clients par cluster")
+
+# Calcul de la distribution des clients par cluster
+cluster_distribution = rfm['Cluster Name'].value_counts().reset_index()
+cluster_distribution.columns = ['Cluster Name', 'Numbre de clients']
+
+fig3 = px.bar(cluster_distribution, x='Cluster Name', y='Numbre de clients', title='Distribution des clients par cluster', labels={
+              'Cluster Name': 'Nom du cluster', 'Numbre de clients': 'Nombre de clients'})
+st.plotly_chart(fig3)
