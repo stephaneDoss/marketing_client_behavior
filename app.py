@@ -14,6 +14,11 @@ st.title('Tableau de Bord RFM Clustering')
 
 st.subheader("Cluster")
 
+fig = px.scatter(rfm, x='Recency', y=['Frequency', 'Monetary'], color='Cluster Name',
+                 labels={'Recency': 'Récence', 'Frequency': 'Fréquence', 'Monetary': 'Montant'})
+
+st.plotly_chart(fig)
+
 # Afficher le graphique interactif avec Plotly Express pour tous les clusters
 fig2 = px.scatter(rfm, x='Frequency', y='Monetary', color='Cluster Name',
                   title='Données RFM pour tous les clusters',
