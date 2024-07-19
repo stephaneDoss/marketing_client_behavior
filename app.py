@@ -14,10 +14,16 @@ st.title('Tableau de Bord RFM Clustering')
 
 st.subheader("Cluster")
 
+# Calcul des agrégats pour la visualisation
+# Ici, nous utilisons 'Monetary' comme mesure pour l'agrégat
+segment_aggregates = rfm.groupby('Cluster Name')[
+    'Monetary'].sum().reset_index()
+
 # Création du Treemap
-fig = px.treemap(rfm,
-                 path=['Cluster Name', 'Recency', 'Frequency', 'Monetary'],
-                 title='Visualisation de la Matrice RFM avec Treemap')
+fig = px.treemap(segment_aggregates,
+                 path=['Cluster Name'],
+                 values='Monetary',
+                 title='Visualisation des Segments par Contribution Monétaire')
 
 # Affichage du Treemap
 st.plotly_chart(fig)
