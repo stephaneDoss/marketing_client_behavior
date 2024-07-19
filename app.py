@@ -14,9 +14,12 @@ st.title('Tableau de Bord RFM Clustering')
 
 st.subheader("Cluster")
 
-fig = px.scatter(rfm, x='Recency', y=['Frequency', 'Monetary'], color='Cluster Name',
-                 labels={'Recency': 'Récence', 'Frequency': 'Fréquence', 'Monetary': 'Montant'})
+# Création du Treemap
+fig = px.treemap(rfm,
+                 path=['Cluster Name', 'Recency', 'Frequency', 'Monetary'],
+                 title='Visualisation de la Matrice RFM avec Treemap')
 
+# Affichage du Treemap
 st.plotly_chart(fig)
 
 # Afficher le graphique interactif avec Plotly Express pour tous les clusters
