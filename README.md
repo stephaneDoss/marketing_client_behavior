@@ -68,7 +68,8 @@ Nous avons besoin des données d'achat sur le site incluant:
 - le montant d'achat
 - le pays d'achat
 
-- D'où les données viennent?
+D'où les données viennent?
+
 Les données viennent de la plateforme UCI (Excel), ([https://archive.ics.uci.edu/dataset/352/online+retail](https://archive.ics.uci.edu/static/public/352/online+retail.zip))
 
 
@@ -128,94 +129,134 @@ Certains des visuels de données qui peuvent être appropriés pour répondre à
 
 ## Pseudocode
 
-- What's the general approach in creating this solution from start to finish?
+- Quelle est l'approche générale dans la création de cette solution du début à la fin ?
 
-1. Get the data
-2. Explore the data in Excel
-3. Load the data into SQL Server
-4. Clean the data with SQL
-5. Test the data with SQL
-6. Visualize the data in Power BI
-7. Generate the findings based on the insights
-8. Write the documentation + commentary
-9. Publish the data to GitHub Pages
+1. Récupérer les données
+2. Explorer ces données dans Excel
+3. Charger ces données dans un dataframe pandas
+4. Nettoyer les données avec pandas
+5. Tester les données avec pandas
+6. Transformer les données avec pandas et k-mean
+7. Visualiser les données avec stremlit
+8. Générer les résultats basés sur les informations
+9. Rédiger la documentation + commentaire
+10. Publiez les données sur la page GitHubs
 
 ## Data exploration notes
 
-This is the stage where you have a scan of what's in the data, errors, inconcsistencies, bugs, weird and corrupted characters etc  
+C'est l'étape où vous avez une analyse du contenu des données, des erreurs, des incohérences, des bugs, des caractères étranges et corrompus, etc.
 
+- Quelles sont vos premières observations avec cet ensemble de données ? Qu’est-ce qui a retenu votre attention jusqu’à présent ?
 
-- What are your initial observations with this dataset? What's caught your attention so far? 
-
-1. There are at least 4 columns that contain the data we need for this analysis, which signals we have everything we need from the file without needing to contact the client for any more data. 
-2. The first column contains the channel ID with what appears to be channel IDS, which are separated by a @ symbol - we need to extract the channel names from this.
-3. Some of the cells and header names are in a different language - we need to confirm if these columns are needed, and if so, we need to address them.
-4. We have more data than we need, so some of these columns would need to be removed
-
+1. Il y a au moins 4 colonnes contenant les données dont nous avons besoin pour cette analyse, ce qui indique que nous avons tout ce dont nous avons besoin dans le fichier sans avoir besoin de contacter le client pour plus de données. 
+2. La quatrième colonne (Quantity) contient la quantité de produits achetés mais elle présente également des valeurs négatives dû aux retours de prodits.
+3. Nous avons plus de données que nécessaire, il faudrait donc supprimer certaines de ces colonnes
 
 
 
 
-## Data cleaning 
-- What do we expect the clean data to look like? (What should it contain? What contraints should we apply to it?)
+## Data cleaning et transform
+- À quoi attendons-nous que les données propres ressemblent ? (Que doit-il contenir ? Quelles contraintes doit-on lui appliquer ?)
 
-The aim is to refine our dataset to ensure it is structured and ready for analysis. 
+L’objectif est d’affiner notre ensemble de données pour garantir qu’il est structuré et prêt à être analysé.
 
-The cleaned data should meet the following criteria and constraints:
+Les données nettoyées doivent répondre aux critères et contraintes suivants :
 
-- Only relevant columns should be retained.
-- All data types should be appropriate for the contents of each column.
-- No column should contain null values, indicating complete data for all records.
+- Seules les colonnes pertinentes doivent être conservées.
+- Tous les types de données doivent être adaptés au contenu de chaque colonne.
+- Aucune colonne ne doit contenir des valeurs nulles, indiquant des données complètes pour tous les enregistrements.
 
-Below is a table outlining the constraints on our cleaned dataset:
+Vous trouverez ci-dessous un tableau décrivant les contraintes sur notre ensemble de données nettoyé :
 
 | Property | Description |
 | --- | --- |
-| Number of Rows | 100 |
-| Number of Columns | 4 |
+| Nombre de Colonne | 4 |
 
-And here is a tabular representation of the expected schema for the clean data:
+Et voici une représentation tabulaire du schéma attendu pour les données propres :
 
 | Column Name | Data Type | Nullable |
 | --- | --- | --- |
-| channel_name | VARCHAR | NO |
-| total_subscribers | INTEGER | NO |
-| total_views | INTEGER | NO |
-| total_videos | INTEGER | NO |
+| Quantity | INTEGER | NO |
+| InvoiceDate | DATETIME | NO |
+| UnitPrice | FLOAT | NO |
+| CustomerId | INTEGER | NO |
 
 
 
-- What steps are needed to clean and shape the data into the desired format?
+- Quelles étapes sont nécessaires pour nettoyer et mettre en forme les données dans le format souhaité ?
 
-1. Remove unnecessary columns by only selecting the ones you need
-2. Extract Youtube channel names from the first column
-3. Rename columns using aliases
-
-
-
-
+1. Enlever les colonnes non nécéssaires
+2. Extraire les lignes n'ayant que Quantity positif
+3. Ajouter les colonnes en calculant, la récence, la fréquence et le montant par Customer
+4. Prédire les clusters
+5. Créer un dataframe avec la moyenne de recence, le montant et fréquence par cluster
 
 
+### Vérification des données 
 
-### Transform the data 
+```python
+# Extraction des lignes avec des quantités positives
+positive_quantities = df[df['Quantity'] >= 0]
+
+# Formatage de la colonne InvoiceDate en datetime
+positive_quantities['InvoiceDate'] = pd.to_datetime(
+    positive_quantities['InvoiceDate'])
+
+# Suppression des colonnes inutiles
+positive_quantities = positive_quantities.drop(
+    columns=['StockCode', 'Description', 'Country'])
+
+```
 
 
 
-```sql
-/*
-# 1. Select the required columns
-# 2. Extract the channel name from the 'NOMBRE' column
-*/
 
--- 1.
-SELECT
-    SUBSTRING(NOMBRE, 1, CHARINDEX('@', NOMBRE) -1) AS channel_name,  -- 2.
-    total_subscribers,
-    total_views,
-    total_videos
+### Nettoyage 
 
-FROM
-    top_uk_youtubers_2024
+```python
+# Extraction des lignes avec des quantités positives
+positive_quantities = df[df['Quantity'] >= 0]
+
+# Formatage de la colonne InvoiceDate en datetime
+positive_quantities['InvoiceDate'] = pd.to_datetime(
+    positive_quantities['InvoiceDate'])
+
+# Suppression des colonnes inutiles
+positive_quantities = positive_quantities.drop(
+    columns=['StockCode', 'Description', 'Country'])
+
+```
+
+### Transformation 
+
+```python
+# Formatage de la colonne InvoiceDate en datetime
+positive_quantities['InvoiceDate'] = pd.to_datetime(
+    positive_quantities['InvoiceDate'])
+
+# Formatage de la colonne InvoiceDate en datetime
+positive_quantities['InvoiceDate'] = pd.to_datetime(
+    positive_quantities['InvoiceDate'])
+
+# Calcul du montant total par transaction et ajout de la colonne TotalPrice
+positive_quantities['TotalPrice'] = positive_quantities['UnitPrice'] * positive_quantities['Quantity']
+
+## Calcul de la récence, fréquence et montant
+# Calcul de la date de référence
+reference_date = pd.to_datetime('2010-12-01')
+# Calculer la récence
+recency = positive_quantities.groupby('CustomerID').agg({
+    'InvoiceDate': lambda x: (reference_date - x.max()).days
+}).rename(columns={'InvoiceDate': 'Recency'})
+# Calculer la fréquence
+frequency = positive_quantities.groupby('CustomerID').agg({
+    'InvoiceDate': 'nunique'
+}).rename(columns={'InvoiceDate': 'Frequency'})
+# Calculer le montant
+monetary = positive_quantities.groupby('CustomerID').agg({
+    'TotalPrice': 'sum'
+}).rename(columns={'TotalPrice': 'Monetary'})
+
 ```
 
 
