@@ -74,26 +74,3 @@ cluster_distribution.columns = ['Cluster Name', 'Numbre de clients']
 fig3 = px.bar(cluster_distribution, x='Cluster Name', y='Numbre de clients', title='Distribution des clients par cluster', labels={
               'Cluster Name': 'Nom du cluster', 'Numbre de clients': 'Nombre de clients'})
 st.plotly_chart(fig3)
-
-st.subheader("Contribution au revenu total par cluster")
-
-# Calcul de la contribution au revenu total par cluster
-revenue_contribution = rfm.groupby('Cluster Name')[
-    'Monetary'].sum().reset_index()
-revenue_contribution = revenue_contribution.sort_values(
-    by='Monetary', ascending=False)
-revenue_contribution['Cumulative Percentage'] = revenue_contribution['Monetary'].cumsum(
-) / revenue_contribution['Monetary'].sum() * 100
-
-# Création du diagramme de Pareto
-fig4 = px.bar(revenue_contribution, x='Cluster Name',
-              y='Monetary', text='Monetary')
-fig4.add_scatter(x=revenue_contribution['Cluster Name'], y=revenue_contribution['Cumulative Percentage'],
-                 mode='lines+markers', name='Cumulative Percentage')
-
-# Mise à jour des layouts pour ajouter un second axe Y pour le pourcentage cumulatif
-fig4.update_layout(title='Contribution de chaque cluster au revenu total et Pourcentage Cumulatif',
-                   yaxis=dict(title='Contribution au Revenu'),
-                   yaxis2=dict(title='Pourcentage Cumulatif', overlaying='y', side='right'))
-
-st.plotly_chart(fig4)
